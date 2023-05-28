@@ -1,9 +1,17 @@
-provider "kubernetes" {
-  config_path = "~/.kube/free-k8s-config"
+terraform {
+  required_providers {
+    oci = {
+      source  = "oracle/oci"
+    }
+  }
 }
 
 provider "oci" {
   region = var.region
+}
+
+provider "kubernetes" {
+  config_path = var.kube_config_path
 }
 
 resource "kubernetes_namespace" "free_namespace" {
